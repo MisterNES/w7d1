@@ -24,22 +24,23 @@ const recurBSearch = (nums, targetNum) => {
   // determine the slice point (ie the 'middle' of the array).
   const middle = nums.length / 2;
   // create "left half" and "right half" arrays, not including the slice point.
-  const left = nums.slice(0, middle -1);
-  const right = nums.slice(middle + 1, nums.length -1);
+  const left = nums.slice(0, middle);
+  const right = nums.slice(middle + 1 , nums.length -1);
   // if targetNum is less than the value in the array at slice point,
   // return this search on the left half
-  if(targetNum < middle){
+  if  (targetNum < middle)  {
     return recurBSearch(left, targetNum);
-  }
-
-  if(targerNum > middle){
-    return recurBSearch(right, targetNum);
   }
   // if targetNum is greater than the value in the array at slice point,
   //return this search on the right half
-
+  else if  (targetNum > middle)  {
+    return recurBSearch(right, targetNum);
+  }
   // if it's not greater than or less than (i.e. 'else'),
   // we know it's equal so return true
+  else  {
+    return true;
+  }
 }
 
 

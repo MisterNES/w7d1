@@ -16,16 +16,25 @@ targetNum is within the nums array.
 *******************************************************************/
 
 const recurBSearch = (nums, targetNum) => {
-  // Base Case: if nums has no length, return false because we've run out of 
+  // Base Case: if nums has no length, return false because we've run out of
   // items to search and haven't found targetNum
-
+  if (nums.length === 0){
+    return false;
+  }
   // determine the slice point (ie the 'middle' of the array).
-
+  const middle = nums.length / 2;
   // create "left half" and "right half" arrays, not including the slice point.
-
+  const left = nums.slice(0, middle -1);
+  const right = nums.slice(middle + 1, nums.length -1);
   // if targetNum is less than the value in the array at slice point,
   // return this search on the left half
+  if(targetNum < middle){
+    return recurBSearch(left, targetNum);
+  }
 
+  if(targerNum > middle){
+    return recurBSearch(right, targetNum);
+  }
   // if targetNum is greater than the value in the array at slice point,
   //return this search on the right half
 
@@ -59,7 +68,7 @@ const iterBSearch = (nums, targetNum) => {
   // between the current upper and current middle, so reassign the upperIdx
   // to the middle (ie cut off the right half of the array)
 
-  // if it's not greater than or less than (ie 'else'), we have found our target 
+  // if it's not greater than or less than (ie 'else'), we have found our target
   // at the midIdx and can return true and stop iterating.
 
   // if we finish our while loop and haven't returned true, we've looked over
@@ -80,9 +89,9 @@ const recurBSearchIdx = (nums, targetNum) => {
   // (instead of true) or -1 (instead of false).
 
   // HINT: the index value you return should be the index in the ORIGINAL array
-  // and not the index of the sliced array. You'll notice this problem arise 
-  // on the 'right half' recursion. in that, try saving the return value of the 
-  // recursive call into a variable, and adding it to the current stack-frame's 
+  // and not the index of the sliced array. You'll notice this problem arise
+  // on the 'right half' recursion. in that, try saving the return value of the
+  // recursive call into a variable, and adding it to the current stack-frame's
   // midIdx + 1.
 }
 
@@ -102,10 +111,10 @@ const recurBSearchIdxV2 = (nums, targetNum, low = null, hi = null) => {
   what part of the original array is being searched. if they meet each other
   we know we have searched the entire array.(NOTE this function has FOUR params)
 
-  Base Case: 
+  Base Case:
   if low is equal to high and we haven't found targetNum, then return -1 to
   indicate that the value was not found.
-  
+
   Determine the slice point (the sum of low and hi, divided by 2)
 
   If targetNum is less than nums[slicepoint], then
@@ -114,7 +123,7 @@ const recurBSearchIdxV2 = (nums, targetNum, low = null, hi = null) => {
 
   If targetNum is less than nums[slicepoint], then
   return the binary search of nums where low is the middle of the array, and hi
-  is the end of the array 
+  is the end of the array
 
   If it's not greater and not less (i.e. 'else'), return the slice point because
   we have found our value!
